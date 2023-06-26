@@ -41,3 +41,4 @@ urllib3==1.26.14
 audiomentations==0.28.0
 pandas==1.5.3
 scikit-image==0.21.0
+eyed3==0.9.7

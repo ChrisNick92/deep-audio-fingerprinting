@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 
 
@@ -22,3 +24,23 @@ def add_background_noise(y: np.ndarray, y_noise: np.ndarray, SNR: float) -> np.n
     z = np.sqrt((E_n / E_y) * snr) * y + y_noise
 
     return z / z.max()
+
+def crawl_directory(directory: str, extension: str = None) -> list:
+    """Crawling data directory
+    Args:
+        directory (str) : The directory to crawl
+    Returns:
+        tree (list)     : A list with all the filepaths
+    """
+    tree = []
+    subdirs = [folder[0] for folder in os.walk(directory)]
+
+    for subdir in subdirs:
+        files = next(os.walk(subdir))[2]
+        for _file in files:
+            if extension is not None:
+                if _file.endswith(extension):
+                    tree.append(os.path.join(subdir, _file))
+            else:
+                tree.append(os.path.join(subdir, _file))
+    return tree
