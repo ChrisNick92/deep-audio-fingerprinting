@@ -42,3 +42,4 @@ audiomentations==0.28.0
 pandas==1.5.3
 scikit-image==0.21.0
 eyed3==0.9.7
+yt-dlp==2023.3.4

@@ -5,7 +5,7 @@ import shutil
 import sys
 import pathlib
 
-ABS_PATH = os.path.dirname(os.path.dirname(__file__))
+ABS_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ABS_PATH)
 
 from tqdm import tqdm

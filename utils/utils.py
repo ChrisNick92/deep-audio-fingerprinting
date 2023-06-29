@@ -1,4 +1,5 @@
 import os
+import wave
 
 import numpy as np
 
@@ -44,3 +45,8 @@ def crawl_directory(directory: str, extension: str = None) -> list:
             else:
                 tree.append(os.path.join(subdir, _file))
     return tree
+
+def get_wav_duration(filename: str) -> int:
+    """Get the time duration of a wav file"""
+    with wave.open(filename, 'rb') as f:
+        return f.getnframes() // f.getframerate()

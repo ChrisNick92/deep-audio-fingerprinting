@@ -131,3 +131,4 @@ dmypy.json
 # Audio
 *.wav
 *.mp3
+*.csv
