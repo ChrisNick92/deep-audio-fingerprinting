@@ -6,13 +6,14 @@
 		// Sets the run context to one level up instead of the .devcontainer folder.
 		"context": "..",
 		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
-		"dockerfile": "../Dockerfile"
+		"dockerfile": "../Dockerfile",
+		"args":{
+			"BUILDKIT_INLINE_CACHE": "0"
+		}
 	},
 	"runArgs": [
         "--gpus",
         "all",
-        "--shm-size",
-        "8g",
         "--env",
         "DISPLAY",
         "--memory=8g"
