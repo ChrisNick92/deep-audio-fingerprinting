@@ -43,4 +43,3 @@ pandas==1.5.3
 scikit-image
 eyed3==0.9.7
 yt-dlp==2023.3.4
-pyaudio==0.2.13
