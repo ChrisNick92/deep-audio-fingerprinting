@@ -132,3 +132,5 @@ dmypy.json
 *.wav
 *.mp3
 *.csv
+.vscode/
+*.pdf
