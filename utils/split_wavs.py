@@ -2,7 +2,7 @@ import os
 import argparse
 import shutil
 
-from utils.utils import crawl_directory
+from utils import crawl_directory
 import numpy as np
 
 
@@ -27,6 +27,7 @@ if __name__ == '__main__':
     val_songs = np.random.choice(all_songs, size=num_vals, replace=False)
     train_songs = set(all_songs).difference(val_songs)
     print(f'Train: {len(train_songs)} | Val: {len(val_songs)}')
+    dirs_to_remove = set()
 
     try:
         train_path = os.path.join(input_dir, "train")
@@ -36,6 +37,7 @@ if __name__ == '__main__':
         raise
     for train_song in train_songs:
         temp_dir = os.path.basename(os.path.dirname(train_song))
+        dirs_to_remove.add(os.path.join(input_dir, temp_dir))
         target_dir = os.path.join(train_path, temp_dir)
         try:
             os.mkdir(target_dir)
@@ -52,7 +54,13 @@ if __name__ == '__main__':
     for val_song in val_songs:
         temp_dir = os.path.basename(os.path.dirname(train_song))
         target_dir = os.path.join(val_path, temp_dir)
+        dirs_to_remove.add(os.path.join(input_dir, temp_dir))
         try:
             os.mkdir(target_dir)
         except Exception as e:
-            shutil.move(src=val_song, dst=target_dir)
+            pass
+        shutil.move(src=val_song, dst=target_dir)
+
+    # Remove empty dirs
+    for dir in dirs_to_remove:
+        os.rmdir(dir)
