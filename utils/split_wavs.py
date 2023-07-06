@@ -44,7 +44,7 @@ if __name__ == '__main__':
         except Exception as e:
             pass
         shutil.move(src=train_song, dst=target_dir)
-    
+
     try:
         val_path = os.path.join(input_dir, "val")
     except Exception as e:

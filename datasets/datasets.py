@@ -5,15 +5,15 @@ current_file_path = os.path.abspath(__file__)
 parent_dir_path = os.path.dirname(os.path.dirname(current_file_path))
 
 sys.path.insert(0, parent_dir_path)
-from utils.utils import energy_in_db, audio_augmentation_chain, extract_mel_spectrogram
+from utils.utils import energy_in_db, audio_augmentation_chain, crawl_directory
 
-import numpy as np
 import torch
 import librosa
 from torch.utils.data import Dataset
 from numpy.random import default_rng
 
 SEED = 42
+
 
 class DynamicAudioDataset(Dataset):
     """Create Dynamic Dataset"""
@@ -22,7 +22,7 @@ class DynamicAudioDataset(Dataset):
         self.data_path = data_path
         self.noise_path = noise_path
         self.ir_path = ir_path
-        self.data = set(os.listdir(data_path))
+        self.data = crawl_directory(data_path)
         self.rng = default_rng(SEED)
         self.time_indices_dict = {}
         self.get_energy_index()
@@ -39,12 +39,12 @@ class DynamicAudioDataset(Dataset):
             full_wav_path = os.path.abspath(os.path.join(self.data_path, wav))
 
             try:
-                signal, sr = librosa.load(full_wav_path, sr=8000)
+                signal, sr = librosa.load(wav, sr=8000)
             except Exception as err:
-                log_info = f"Error occured on: {os.path.basename(full_wav_path)}."
+                log_info = f"Error occured on: {os.path.basename(wav)}."
                 print(log_info)
                 print(f"Exception: {err}")
-                print(f'Removed filename: {wav}')
+                print(f'Removed filename: {os.path.basename(wav)}')
             else:
                 max_time_index = int(signal.size / sr) - 1
                 if max_time_index:
@@ -57,15 +57,15 @@ class DynamicAudioDataset(Dataset):
 
                     if len(indices) > 0:
                         # keep all the random indices for each song (time_indices_dict)
-                        self.time_indices_dict[full_wav_path] = indices
+                        self.time_indices_dict[wav] = indices
                         to_keep.append(wav)
                     else:
-                        print(f'File {wav} has no segments that have higher energy than zero')
-                        print(f'Removed filename: {wav}')
+                        print(f'File {os.path.basename(wav)} has no segments that have higher energy than zero')
+                        print(f'Removed filename: {os.path.basename(wav)}')
                 else:
-                    print(f'File: {wav} has duration less than 1 sec. Skipping...')
+                    print(f'File: {os.path.basename(wav)} has duration less than 1 sec. Skipping...')
 
-        self.data = [os.path.abspath(os.path.join(self.data_path, wav)) for wav in to_keep]
+        self.data = to_keep
 
     def __len__(self):
         return len(self.data)

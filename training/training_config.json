@@ -1,0 +1,15 @@
+{
+    "epochs": 120,
+    "patience": 15,
+    "batch size": 120,
+    "lr": 1e-3,
+    "model name": "baseline_fp",
+    "optimizer": "Lamb",
+    "output_path": "data/pretrained_models",
+    "background_noise_train": "data/background_noise",
+    "background_noise_val": "data/background_vals",
+    "impulse_responses_train": "data/impulse_responses",
+    "impulse_responses_val": "data/impulse_responses_val",
+    "train_set": ["data/small_dataset/demo_songs", "data/small_dataset/fma_medium/train", "data/small_dataset/unique_1K_songs"],
+    "val_set": ["data/small_dataset/fma_medium/val"]
+}

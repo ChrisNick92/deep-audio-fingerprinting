@@ -134,3 +134,4 @@ dmypy.json
 *.csv
 .vscode/
 *.pdf
+*.pt

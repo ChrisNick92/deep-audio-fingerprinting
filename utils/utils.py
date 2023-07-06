@@ -29,6 +29,7 @@ def add_background_noise(y: np.ndarray, y_noise: np.ndarray, SNR: float) -> np.n
 
     return z / z.max()
 
+
 def crawl_directory(directory: str, extension: str = None) -> list:
     """Crawling data directory
     Args:
@@ -49,11 +50,13 @@ def crawl_directory(directory: str, extension: str = None) -> list:
                 tree.append(os.path.join(subdir, _file))
     return tree
 
+
 def get_wav_duration(filename: str) -> int:
     """Get the time duration of a wav file"""
     with wave.open(filename, 'rb') as f:
         return f.getnframes() // f.getframerate()
-    
+
+
 def energy_in_db(signal: np.ndarray) -> float:
     """Return the energy of the input signal in dB.
     
@@ -64,6 +67,7 @@ def energy_in_db(signal: np.ndarray) -> float:
         float: The energy in dB.
     """
     return 20 * np.log10(np.sum(signal**2))
+
 
 def time_offset_modulation(signal: np.ndarray, time_index: int, sr: int = 8000, max_offset: float = 0.25) -> np.ndarray:
     """Given an audio segment of signal returns the signal result with a time offset of +- max_offset ms.
@@ -84,6 +88,7 @@ def time_offset_modulation(signal: np.ndarray, time_index: int, sr: int = 8000, 
 
     return signal[start:start + sr]
 
+
 def extract_mel_spectrogram(
     signal: np.ndarray, sr: int = 8000, n_fft: int = 1024, hop_length: int = 256, n_mels: int = 256
 ) -> np.ndarray:
@@ -91,6 +96,7 @@ def extract_mel_spectrogram(
     S = librosa.feature.melspectrogram(y=signal, sr=sr, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
     # convert to dB for log-power mel-spectrograms
     return librosa.power_to_db(S, ref=np.max)
+
 
 def audio_augmentation_chain(
     signal: np.ndarray, time_index: int, noise_path: str, ir_path: str, rng: np.random.Generator, sr: int = 8000
@@ -108,13 +114,20 @@ def audio_augmentation_chain(
     Returns:
         Tuple[np.ndarray, np.ndarray]: Tuple corresponding to (Spectrogram_original, Spectrogram_augmented).
     """
-
-    augmentation_chain = Compose(
-        [
-            AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=0., max_snr_in_db=10., p=1.),
-            ApplyImpulseResponse(ir_path=ir_path, p=1.),
-        ]
-    )
+    if rng.random() > 0.40:
+        augmentation_chain = Compose(
+            [
+                AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=5., max_snr_in_db=10., p=1.),
+                ApplyImpulseResponse(ir_path=ir_path, p=1.),
+            ]
+        )
+    else:
+        augmentation_chain = Compose(
+            [
+                AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=0., max_snr_in_db=5., p=1.),
+                ApplyImpulseResponse(ir_path=ir_path, p=1.),
+            ]
+        )
     # Get the corresponding segment
     y = signal[time_index * sr:(time_index + 1) * sr]
 
@@ -130,3 +143,18 @@ def audio_augmentation_chain(
     S2 = extract_mel_spectrogram(augmented_signal)
 
     return S1, S2
+
+def cutout_spec_augment_mask(rng: np.random.Generator = None):
+
+    H, W = 256, 32
+    H_max, W_max = H // 2, int(0.9 * W)
+    mask = np.ones((1, H, W), dtype=np.float32)
+
+    rng = rng if rng else np.random.default_rng()
+    H_start, dH = rng.integers(low=0, high=H_max, size=2)
+    W_start = rng.integers(low=0, high=W_max, size=1).item()
+    dW = rng.integers(low=0, high=int(0.1 * W), size=1).item()
+    
+    mask[:, H_start:H_start + dH, W_start:W_start + dW] = 0
+
+    return mask
