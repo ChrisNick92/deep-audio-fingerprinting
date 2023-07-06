@@ -52,7 +52,7 @@ if __name__ == '__main__':
         raise
 
     for val_song in val_songs:
-        temp_dir = os.path.basename(os.path.dirname(train_song))
+        temp_dir = os.path.basename(os.path.dirname(val_song))
         target_dir = os.path.join(val_path, temp_dir)
         dirs_to_remove.add(os.path.join(input_dir, temp_dir))
         try:
