@@ -39,7 +39,7 @@ def training_loop(
     print(f"Current device: {device}")
     N = batch_size // 2
     model = Neural_Fingerprinter().to(device)
-    num_workers = multiprocessing.cpu_count() // 2
+    num_workers = multiprocessing.cpu_count()
     loss_fn = Focal_NTxent_Loss(n_org=N, n_rep=N, device=device, gamma=2.).to(device)
     train_dloader = DataLoader(
         train_dset,

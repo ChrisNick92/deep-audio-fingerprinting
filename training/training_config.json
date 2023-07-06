@@ -1,7 +1,7 @@
 {
     "epochs": 120,
     "patience": 15,
-    "batch size": 600,
+    "batch size": 500,
     "lr": 1e-3,
     "model name": "baseline_fp",
     "optimizer": "Lamb",

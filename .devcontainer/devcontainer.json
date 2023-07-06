@@ -16,7 +16,9 @@
         "all",
         "--env",
         "DISPLAY",
-        "--memory=8g"
+        "--memory=8g",
+		"--shm-size=8g",
+		"--cpus=0.5"
     ]
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
