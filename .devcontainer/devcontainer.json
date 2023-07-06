@@ -18,7 +18,7 @@
         "DISPLAY",
         "--memory=8g",
 		"--shm-size=8g",
-		"--cpus=0.5"
+		"--cpuset-cpus=0-7"
     ]
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
