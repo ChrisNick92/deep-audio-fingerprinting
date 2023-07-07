@@ -6,3 +6,4 @@
 *.csv
 *.py
 *.ipynb
+*.pt

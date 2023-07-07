@@ -1,0 +1,14 @@
+{
+    "model": "data/pretrained_models/baseline_fp.pt",
+    "index": "data/faiss_indexes/baseline_fp/baseline_fp_small.index",
+    "json": "data/faiss_indexes/baseline_fp/baseline_fp_small.json",
+    "background_noise": "data/background_vals",
+    "demo_songs": "data/small_dataset/demo_songs",
+    "snrs": [0, 5, 10, 15],
+    "durations": [1, 2, 3, 4, 5, 10],
+    "device": "cpu",
+    "sr": 8000,
+    "hop_size": 4000,
+    "neighbors": 4,
+    "nprobes": 1
+}

@@ -48,7 +48,6 @@ if __name__ == '__main__':
     durs = args.duration
 
     audio_files = crawl_directory(input_folder, extension='wav')
-    noise_files = crawl_directory(noise_folder, extension='wav')
     djv = Dejavu(config)
     
     for dur in durs:

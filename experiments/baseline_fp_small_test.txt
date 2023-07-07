@@ -1,0 +1,197 @@
+nohup: ignoring input
+Running on cpu
+********** Deep audio test with Query duration: 1 **********
+
+
+********** SNR: 0 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:26<07:03, 26.47s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Street Cafe - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 12%|█▏        | 2/17 [00:54<06:50, 27.38s/it] 18%|█▊        | 3/17 [01:26<06:51, 29.41s/it] 24%|██▎       | 4/17 [02:00<06:48, 31.40s/it] 29%|██▉       | 5/17 [02:26<05:52, 29.39s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/inside-of-train-with-people-22963.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 35%|███▌      | 6/17 [02:58<05:31, 30.15s/it] 41%|████      | 7/17 [03:43<05:50, 35.07s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/restaurant-ambience-24720.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 47%|████▋     | 8/17 [04:26<05:39, 37.73s/it] 53%|█████▎    | 9/17 [04:51<04:29, 33.70s/it] 59%|█████▉    | 10/17 [05:31<04:09, 35.60s/it] 65%|██████▍   | 11/17 [06:07<03:35, 35.84s/it] 71%|███████   | 12/17 [06:33<02:44, 32.81s/it] 76%|███████▋  | 13/17 [07:05<02:09, 32.40s/it] 82%|████████▏ | 14/17 [07:44<01:43, 34.57s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Cafe - General Ambience, Busy - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 88%|████████▊ | 15/17 [08:15<01:07, 33.52s/it] 94%|█████████▍| 16/17 [08:47<00:32, 32.97s/it]100%|██████████| 17/17 [09:20<00:00, 32.97s/it]100%|██████████| 17/17 [09:20<00:00, 32.98s/it]
+Accuracy: 78.11 %
+F1: 85.97 %
+Recall : 77.56 %
+Precision: 97.36 %
+Top 1 hit rate: 23.75 %
+
+
+********** SNR: 5 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:26<07:03, 26.46s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Outdoor Cafe, Small Crowd Conversation, Light Traffic Rumble - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 12%|█▏        | 2/17 [00:54<06:49, 27.33s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Cafeteria General Atmosphere - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 18%|█▊        | 3/17 [01:25<06:44, 28.91s/it] 24%|██▎       | 4/17 [01:57<06:33, 30.29s/it] 29%|██▉       | 5/17 [02:21<05:37, 28.16s/it] 35%|███▌      | 6/17 [02:49<05:07, 27.97s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Coffee Shop - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 41%|████      | 7/17 [03:19<04:45, 28.58s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Cafe - General Ambience, Busy - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 47%|████▋     | 8/17 [03:56<04:42, 31.41s/it] 53%|█████▎    | 9/17 [04:20<03:51, 28.89s/it] 59%|█████▉    | 10/17 [04:56<03:37, 31.14s/it] 65%|██████▍   | 11/17 [05:32<03:15, 32.55s/it] 71%|███████   | 12/17 [05:57<02:31, 30.22s/it] 76%|███████▋  | 13/17 [06:25<01:58, 29.61s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/inside-of-train-with-people-22963.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 82%|████████▏ | 14/17 [06:58<01:32, 30.80s/it] 88%|████████▊ | 15/17 [07:28<01:00, 30.37s/it] 94%|█████████▍| 16/17 [07:57<00:30, 30.21s/it]100%|██████████| 17/17 [08:26<00:00, 29.70s/it]100%|██████████| 17/17 [08:26<00:00, 29.80s/it]
+Accuracy: 90.92 %
+F1: 94.32 %
+Recall : 90.55 %
+Precision: 98.71 %
+Top 1 hit rate: 27.49 %
+
+
+********** SNR: 10 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/restaurant-ambience-24720.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+  6%|▌         | 1/17 [00:25<06:43, 25.19s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Coffee Shop - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 12%|█▏        | 2/17 [00:50<06:23, 25.54s/it] 18%|█▊        | 3/17 [01:19<06:19, 27.09s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/inside-of-train-with-people-22963.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 24%|██▎       | 4/17 [01:50<06:09, 28.44s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Outdoor Cafe, Small Crowd Conversation, Light Traffic Rumble - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 29%|██▉       | 5/17 [02:09<04:58, 24.90s/it] 35%|███▌      | 6/17 [02:33<04:32, 24.76s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Street Cafe - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Cafe - General Ambience, Busy - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 41%|████      | 7/17 [03:08<04:41, 28.20s/it] 47%|████▋     | 8/17 [03:45<04:39, 31.03s/it] 53%|█████▎    | 9/17 [04:09<03:50, 28.81s/it] 59%|█████▉    | 10/17 [04:45<03:36, 30.97s/it] 65%|██████▍   | 11/17 [05:18<03:10, 31.70s/it] 71%|███████   | 12/17 [05:42<02:26, 29.21s/it] 76%|███████▋  | 13/17 [06:08<01:52, 28.13s/it] 82%|████████▏ | 14/17 [06:42<01:29, 29.92s/it] 88%|████████▊ | 15/17 [07:06<00:56, 28.25s/it] 94%|█████████▍| 16/17 [07:32<00:27, 27.58s/it]100%|██████████| 17/17 [08:02<00:00, 28.19s/it]100%|██████████| 17/17 [08:02<00:00, 28.37s/it]
+Accuracy: 92.47 %
+F1: 95.19 %
+Recall : 92.09 %
+Precision: 98.67 %
+Top 1 hit rate: 23.77 %
+
+
+********** SNR: 15 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:25<06:41, 25.08s/it] 12%|█▏        | 2/17 [00:52<06:33, 26.22s/it] 18%|█▊        | 3/17 [01:19<06:11, 26.54s/it] 24%|██▎       | 4/17 [01:49<06:05, 28.10s/it] 29%|██▉       | 5/17 [02:10<05:07, 25.62s/it] 35%|███▌      | 6/17 [02:38<04:50, 26.38s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Cafeteria General Atmosphere - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/restaurant-ambience-24720.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 41%|████      | 7/17 [03:16<05:02, 30.23s/it] 47%|████▋     | 8/17 [03:50<04:41, 31.30s/it] 53%|█████▎    | 9/17 [04:07<03:35, 26.96s/it] 59%|█████▉    | 10/17 [04:42<03:26, 29.49s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Coffee Shop - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 65%|██████▍   | 11/17 [05:16<03:05, 30.88s/it] 71%|███████   | 12/17 [05:40<02:23, 28.65s/it] 76%|███████▋  | 13/17 [06:07<01:52, 28.18s/it] 82%|████████▏ | 14/17 [06:38<01:27, 29.00s/it] 88%|████████▊ | 15/17 [07:08<00:58, 29.29s/it] 94%|█████████▍| 16/17 [07:37<00:29, 29.21s/it]100%|██████████| 17/17 [08:04<00:00, 28.44s/it]100%|██████████| 17/17 [08:04<00:00, 28.48s/it]
+Accuracy: 92.61 %
+F1: 95.36 %
+Recall : 92.19 %
+Precision: 98.95 %
+Top 1 hit rate: 18.50 %
+
+{'Inference Time': 114.60573411336635, 'Query Time': 6.533033394500527, 'Total': 121.13876750786687}
+********** Deep audio test with Query duration: 2 **********
+
+
+********** SNR: 0 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:17<04:33, 17.10s/it] 12%|█▏        | 2/17 [00:34<04:22, 17.53s/it] 18%|█▊        | 3/17 [00:55<04:23, 18.85s/it] 24%|██▎       | 4/17 [01:16<04:17, 19.77s/it] 29%|██▉       | 5/17 [01:33<03:43, 18.63s/it] 35%|███▌      | 6/17 [01:52<03:27, 18.88s/it] 41%|████      | 7/17 [02:19<03:35, 21.60s/it] 47%|████▋     | 8/17 [02:45<03:26, 22.93s/it] 53%|█████▎    | 9/17 [03:01<02:45, 20.71s/it] 59%|█████▉    | 10/17 [03:25<02:32, 21.77s/it] 65%|██████▍   | 11/17 [03:48<02:13, 22.23s/it] 71%|███████   | 12/17 [04:05<01:42, 20.50s/it] 76%|███████▋  | 13/17 [04:24<01:20, 20.12s/it] 82%|████████▏ | 14/17 [04:48<01:03, 21.33s/it] 88%|████████▊ | 15/17 [05:08<00:41, 20.95s/it] 94%|█████████▍| 16/17 [05:29<00:20, 20.86s/it]100%|██████████| 17/17 [05:53<00:00, 21.70s/it]100%|██████████| 17/17 [05:53<00:00, 20.77s/it]
+Accuracy: 95.46 %
+F1: 96.98 %
+Recall : 95.27 %
+Precision: 98.91 %
+Top 1 hit rate: 58.27 %
+
+
+********** SNR: 5 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:17<04:35, 17.22s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/inside-of-train-with-people-22963.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 12%|█▏        | 2/17 [00:35<04:25, 17.73s/it] 18%|█▊        | 3/17 [00:57<04:35, 19.64s/it] 24%|██▎       | 4/17 [01:18<04:24, 20.35s/it] 29%|██▉       | 5/17 [01:34<03:44, 18.69s/it] 35%|███▌      | 6/17 [01:53<03:28, 18.92s/it] 41%|████      | 7/17 [02:20<03:34, 21.45s/it] 47%|████▋     | 8/17 [02:46<03:26, 22.90s/it] 53%|█████▎    | 9/17 [03:02<02:45, 20.73s/it] 59%|█████▉    | 10/17 [03:26<02:33, 21.90s/it] 65%|██████▍   | 11/17 [03:50<02:14, 22.39s/it]/home/chrisnick/miniconda3/envs/deep_fingerprinting/lib/python3.9/site-packages/audiomentations/augmentations/add_background_noise.py:128: UserWarning: The file /home/chrisnick/projects/deep-audio-fingerprinting/data/background_noise/Outdoor Cafe, Small Crowd Conversation, Light Traffic Rumble - QuickSounds.com.wav is too silent to be added as noise. Returning the input unchanged.
+  warnings.warn(
+ 71%|███████   | 12/17 [04:07<01:43, 20.68s/it] 76%|███████▋  | 13/17 [04:26<01:21, 20.29s/it] 82%|████████▏ | 14/17 [04:51<01:04, 21.60s/it] 88%|████████▊ | 15/17 [05:11<00:42, 21.23s/it] 94%|█████████▍| 16/17 [05:32<00:21, 21.03s/it]100%|██████████| 17/17 [05:53<00:00, 21.22s/it]100%|██████████| 17/17 [05:53<00:00, 20.81s/it]
+Accuracy: 97.66 %
+F1: 98.47 %
+Recall : 97.61 %
+Precision: 99.39 %
+Top 1 hit rate: 42.02 %
+
+
+********** SNR: 10 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:16<04:30, 16.92s/it] 12%|█▏        | 2/17 [00:35<04:25, 17.68s/it] 18%|█▊        | 3/17 [00:55<04:23, 18.81s/it] 24%|██▎       | 4/17 [01:16<04:16, 19.76s/it] 29%|██▉       | 5/17 [01:32<03:39, 18.31s/it] 35%|███▌      | 6/17 [01:51<03:25, 18.66s/it] 41%|████      | 7/17 [02:19<03:36, 21.68s/it] 47%|████▋     | 8/17 [02:46<03:30, 23.41s/it] 53%|█████▎    | 9/17 [03:02<02:48, 21.07s/it] 59%|█████▉    | 10/17 [03:27<02:35, 22.14s/it] 65%|██████▍   | 11/17 [03:50<02:15, 22.52s/it] 71%|███████   | 12/17 [04:07<01:43, 20.77s/it] 76%|███████▋  | 13/17 [04:26<01:21, 20.34s/it] 82%|████████▏ | 14/17 [04:51<01:05, 21.81s/it] 88%|████████▊ | 15/17 [05:11<00:42, 21.27s/it] 94%|█████████▍| 16/17 [05:32<00:21, 21.09s/it]100%|██████████| 17/17 [05:53<00:00, 21.18s/it]100%|██████████| 17/17 [05:53<00:00, 20.81s/it]
+Accuracy: 98.14 %
+F1: 98.75 %
+Recall : 98.08 %
+Precision: 99.48 %
+Top 1 hit rate: 32.60 %
+
+
+********** SNR: 15 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:16<04:31, 16.95s/it] 12%|█▏        | 2/17 [00:34<04:21, 17.41s/it] 18%|█▊        | 3/17 [00:54<04:21, 18.71s/it] 24%|██▎       | 4/17 [01:15<04:15, 19.63s/it] 29%|██▉       | 5/17 [01:31<03:38, 18.22s/it] 35%|███▌      | 6/17 [01:51<03:25, 18.66s/it] 41%|████      | 7/17 [02:17<03:32, 21.27s/it] 47%|████▋     | 8/17 [02:43<03:24, 22.71s/it] 53%|█████▎    | 9/17 [02:59<02:44, 20.57s/it] 59%|█████▉    | 10/17 [03:24<02:32, 21.81s/it] 65%|██████▍   | 11/17 [03:47<02:13, 22.31s/it] 71%|███████   | 12/17 [04:04<01:42, 20.59s/it] 76%|███████▋  | 13/17 [04:23<01:21, 20.26s/it] 82%|████████▏ | 14/17 [04:47<01:04, 21.45s/it] 88%|████████▊ | 15/17 [05:07<00:42, 21.03s/it] 94%|█████████▍| 16/17 [05:28<00:20, 20.95s/it]100%|██████████| 17/17 [05:50<00:00, 21.07s/it]100%|██████████| 17/17 [05:50<00:00, 20.59s/it]
+Accuracy: 98.37 %
+F1: 98.84 %
+Recall : 98.34 %
+Precision: 99.37 %
+Top 1 hit rate: 28.59 %
+
+{'Inference Time': 162.3570405891555, 'Query Time': 6.127495902953723, 'Total': 168.48453649210924}
+********** Deep audio test with Query duration: 3 **********
+
+
+********** SNR: 0 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:13<03:33, 13.32s/it] 12%|█▏        | 2/17 [00:27<03:27, 13.81s/it] 18%|█▊        | 3/17 [00:43<03:26, 14.75s/it] 24%|██▎       | 4/17 [00:59<03:21, 15.50s/it] 29%|██▉       | 5/17 [01:12<02:52, 14.41s/it] 35%|███▌      | 6/17 [01:27<02:41, 14.66s/it] 41%|████      | 7/17 [01:48<02:47, 16.79s/it] 47%|████▋     | 8/17 [02:09<02:42, 18.04s/it] 53%|█████▎    | 9/17 [02:22<02:10, 16.34s/it] 59%|█████▉    | 10/17 [02:41<02:00, 17.18s/it] 65%|██████▍   | 11/17 [02:59<01:45, 17.57s/it] 71%|███████   | 12/17 [03:12<01:21, 16.27s/it] 76%|███████▋  | 13/17 [03:28<01:03, 15.93s/it] 82%|████████▏ | 14/17 [03:47<00:50, 16.88s/it] 88%|████████▊ | 15/17 [04:03<00:33, 16.59s/it] 94%|█████████▍| 16/17 [04:19<00:16, 16.53s/it]100%|██████████| 17/17 [04:36<00:00, 16.62s/it]100%|██████████| 17/17 [04:36<00:00, 16.25s/it]
+Accuracy: 97.99 %
+F1: 98.70 %
+Recall : 97.99 %
+Precision: 99.46 %
+Top 1 hit rate: 69.18 %
+
+
+********** SNR: 5 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:13<03:31, 13.20s/it] 12%|█▏        | 2/17 [00:27<03:29, 13.99s/it] 18%|█▊        | 3/17 [00:43<03:28, 14.86s/it] 24%|██▎       | 4/17 [01:02<03:32, 16.37s/it] 29%|██▉       | 5/17 [01:15<03:03, 15.31s/it] 35%|███▌      | 6/17 [01:30<02:47, 15.24s/it] 41%|████      | 7/17 [01:51<02:51, 17.16s/it] 47%|████▋     | 8/17 [02:12<02:43, 18.17s/it] 53%|█████▎    | 9/17 [02:24<02:10, 16.37s/it] 59%|█████▉    | 10/17 [02:43<02:00, 17.26s/it] 65%|██████▍   | 11/17 [03:02<01:45, 17.60s/it] 71%|███████   | 12/17 [03:15<01:21, 16.27s/it] 76%|███████▋  | 13/17 [03:31<01:04, 16.22s/it] 82%|████████▏ | 14/17 [03:50<00:51, 17.03s/it] 88%|████████▊ | 15/17 [04:06<00:33, 16.64s/it] 94%|█████████▍| 16/17 [04:23<00:16, 16.76s/it]100%|██████████| 17/17 [04:40<00:00, 16.77s/it]100%|██████████| 17/17 [04:40<00:00, 16.48s/it]
+Accuracy: 99.07 %
+F1: 99.33 %
+Recall : 99.03 %
+Precision: 99.65 %
+Top 1 hit rate: 50.07 %
+
+
+********** SNR: 10 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:13<03:32, 13.26s/it] 12%|█▏        | 2/17 [00:27<03:25, 13.69s/it] 18%|█▊        | 3/17 [00:43<03:25, 14.70s/it] 24%|██▎       | 4/17 [00:59<03:20, 15.41s/it] 29%|██▉       | 5/17 [01:12<02:52, 14.35s/it] 35%|███▌      | 6/17 [01:27<02:40, 14.61s/it] 41%|████      | 7/17 [01:48<02:47, 16.76s/it] 47%|████▋     | 8/17 [02:08<02:40, 17.88s/it] 53%|█████▎    | 9/17 [02:21<02:09, 16.19s/it] 59%|█████▉    | 10/17 [02:40<01:59, 17.08s/it] 65%|██████▍   | 11/17 [02:58<01:44, 17.46s/it] 71%|███████   | 12/17 [03:11<01:20, 16.19s/it] 76%|███████▋  | 13/17 [03:27<01:03, 15.87s/it] 82%|████████▏ | 14/17 [03:46<00:50, 16.83s/it] 88%|████████▊ | 15/17 [04:01<00:33, 16.51s/it] 94%|█████████▍| 16/17 [04:17<00:16, 16.41s/it]100%|██████████| 17/17 [04:34<00:00, 16.56s/it]100%|██████████| 17/17 [04:34<00:00, 16.17s/it]
+Accuracy: 99.14 %
+F1: 99.34 %
+Recall : 99.14 %
+Precision: 99.56 %
+Top 1 hit rate: 37.72 %
+
+
+********** SNR: 15 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:13<03:30, 13.14s/it] 12%|█▏        | 2/17 [00:27<03:25, 13.68s/it] 18%|█▊        | 3/17 [00:43<03:25, 14.67s/it] 24%|██▎       | 4/17 [00:59<03:20, 15.43s/it] 29%|██▉       | 5/17 [01:12<02:52, 14.35s/it] 35%|███▌      | 6/17 [01:27<02:41, 14.70s/it] 41%|████      | 7/17 [01:48<02:48, 16.80s/it] 47%|████▋     | 8/17 [02:09<02:41, 17.97s/it] 53%|█████▎    | 9/17 [02:22<02:12, 16.54s/it] 59%|█████▉    | 10/17 [02:42<02:02, 17.54s/it] 65%|██████▍   | 11/17 [03:00<01:46, 17.79s/it] 71%|███████   | 12/17 [03:14<01:22, 16.47s/it] 76%|███████▋  | 13/17 [03:29<01:04, 16.11s/it] 82%|████████▏ | 14/17 [03:48<00:50, 16.96s/it] 88%|████████▊ | 15/17 [04:04<00:33, 16.69s/it] 94%|█████████▍| 16/17 [04:20<00:16, 16.60s/it]100%|██████████| 17/17 [04:37<00:00, 16.62s/it]100%|██████████| 17/17 [04:37<00:00, 16.32s/it]
+Accuracy: 98.85 %
+F1: 99.26 %
+Recall : 98.90 %
+Precision: 99.65 %
+Top 1 hit rate: 32.61 %
+
+{'Inference Time': 187.80827787987428, 'Query Time': 11.171276392075072, 'Total': 198.97955427194935}
+********** Deep audio test with Query duration: 4 **********
+
+
+********** SNR: 0 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:11<03:11, 11.98s/it] 12%|█▏        | 2/17 [00:24<03:06, 12.42s/it] 18%|█▊        | 3/17 [00:38<03:05, 13.26s/it] 24%|██▎       | 4/17 [00:54<03:01, 13.99s/it] 29%|██▉       | 5/17 [01:05<02:35, 12.98s/it] 35%|███▌      | 6/17 [01:18<02:25, 13.21s/it] 41%|████      | 7/17 [01:38<02:31, 15.14s/it] 47%|████▋     | 8/17 [01:56<02:25, 16.13s/it] 53%|█████▎    | 9/17 [02:10<02:03, 15.47s/it] 59%|█████▉    | 10/17 [02:28<01:54, 16.41s/it] 65%|██████▍   | 11/17 [02:45<01:38, 16.41s/it] 71%|███████   | 12/17 [02:57<01:15, 15.03s/it] 76%|███████▋  | 13/17 [03:11<00:58, 14.71s/it] 82%|████████▏ | 14/17 [03:28<00:46, 15.50s/it] 88%|████████▊ | 15/17 [03:42<00:30, 15.09s/it] 94%|█████████▍| 16/17 [03:57<00:14, 14.97s/it]100%|██████████| 17/17 [04:12<00:00, 15.07s/it]100%|██████████| 17/17 [04:12<00:00, 14.85s/it]
+Accuracy: 98.47 %
+F1: 98.97 %
+Recall : 98.41 %
+Precision: 99.56 %
+Top 1 hit rate: 73.25 %
+
+
+********** SNR: 5 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:13<03:43, 13.95s/it] 12%|█▏        | 2/17 [00:27<03:23, 13.57s/it] 18%|█▊        | 3/17 [00:41<03:15, 14.00s/it] 24%|██▎       | 4/17 [00:57<03:12, 14.81s/it] 29%|██▉       | 5/17 [01:09<02:42, 13.52s/it] 35%|███▌      | 6/17 [01:22<02:29, 13.55s/it] 41%|████      | 7/17 [01:41<02:32, 15.23s/it] 47%|████▋     | 8/17 [01:59<02:24, 16.01s/it] 53%|█████▎    | 9/17 [02:10<01:56, 14.53s/it] 59%|█████▉    | 10/17 [02:31<01:55, 16.46s/it] 65%|██████▍   | 11/17 [02:48<01:39, 16.63s/it] 71%|███████   | 12/17 [03:00<01:16, 15.31s/it] 76%|███████▋  | 13/17 [03:16<01:02, 15.62s/it] 82%|████████▏ | 14/17 [03:34<00:49, 16.38s/it] 88%|████████▊ | 15/17 [03:53<00:34, 17.10s/it] 94%|█████████▍| 16/17 [04:11<00:17, 17.31s/it]100%|██████████| 17/17 [04:30<00:00, 17.86s/it]100%|██████████| 17/17 [04:30<00:00, 15.92s/it]
+Accuracy: 98.75 %
+F1: 99.18 %
+Recall : 98.78 %
+Precision: 99.61 %
+Top 1 hit rate: 55.13 %
+
+
+********** SNR: 10 **********
+
+  0%|          | 0/17 [00:00<?, ?it/s]  6%|▌         | 1/17 [00:14<03:45, 14.11s/it] 12%|█▏        | 2/17 [00:29<03:38, 14.59s/it] 18%|█▊        | 3/17 [00:44<03:32, 15.17s/it] 24%|██▎       | 4/17 [01:02<03:30, 16.17s/it] 29%|██▉       | 5/17 [01:15<03:01, 15.09s/it] 35%|███▌      | 6/17 [01:33<02:54, 15.86s/it] 41%|████      | 7/17 [01:55<03:00, 18.02s/it] 47%|████▋     | 8/17 [02:19<02:57, 19.74s/it] 53%|█████▎    | 9/17 [02:33<02:24, 18.09s/it] 59%|█████▉    | 10/17 [02:52<02:09, 18.50s/it] 65%|██████▍   | 11/17 [03:09<01:48, 18.01s/it]

@@ -1,6 +1,8 @@
 import os
 import wave
 import random
+from collections import Counter
+from typing import Dict
 
 import numpy as np
 from audiomentations import Compose, AddBackgroundNoise, ApplyImpulseResponse
@@ -158,3 +160,41 @@ def cutout_spec_augment_mask(rng: np.random.Generator = None):
     mask[:, H_start:H_start + dH, W_start:W_start + dW] = 0
 
     return mask
+
+def query_sequence_search(D, I):
+    compensations = []
+    for i, idx in enumerate(I):
+        compensations.append([(x - i) for x in idx])
+    candidates = np.unique(compensations)
+    scores = []
+    D_flat = D.flatten()
+    I_flat = I.flatten()
+    for c in candidates:
+        idxs = np.where((c <= I_flat) & (I_flat <= c + len(D)))[0]
+        scores.append(np.sum(D_flat[idxs]))
+    return candidates[np.argmax(scores)], round(max(scores), 4)
+
+def search_index(idx: int, sorted_arr: np.ndarray):
+    candidate_indices = np.where(sorted_arr <= idx)[0]
+    return sorted_arr[candidate_indices].max()
+
+def majority_vote_search(d: Dict, I: np.ndarray, sorted_array: np.ndarray):
+    preds = []
+    I_flat = I.flatten()
+    preds = [d[str(search_index(idx, sorted_array))] for idx in I_flat]
+    c = Counter(preds)
+    return c.most_common()[0][0]
+
+def get_winner(d: Dict, I: np.ndarray, D: np.ndarray, sorted_array: np.ndarray):
+    preds = []
+    I_flat = I.flatten()
+    D_flat_inverse = 1 / D.flatten()
+    preds = np.array([d[str(search_index(idx, sorted_array))] for idx in I_flat])
+    c = Counter(preds)
+    winner = c.most_common()[0][0]
+    idxs = np.where(preds == winner)[0]
+    # num_matches = c.most_common()[0][1]
+    
+    D_shape = D.shape[0] * D.shape[1]
+
+    return winner, (1 / D_shape) * D_flat_inverse[idxs].sum()
