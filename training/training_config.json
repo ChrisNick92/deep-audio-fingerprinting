@@ -3,13 +3,16 @@
     "patience": 15,
     "batch size": 500,
     "lr": 1e-3,
-    "model name": "baseline_fp",
+    "model name": "baseline_fp_02",
     "optimizer": "Lamb",
     "output_path": "data/pretrained_models",
-    "background_noise_train": "data/background_noise",
-    "background_noise_val": "data/background_vals",
+    "background_noise_train": "data/background_train",
+    "background_noise_val": "data/background_val",
     "impulse_responses_train": "data/impulse_responses",
     "impulse_responses_val": "data/impulse_responses_val",
-    "train_set": ["data/small_dataset/demo_songs", "data/small_dataset/fma_medium/train", "data/small_dataset/unique_1K_songs"],
-    "val_set": ["data/small_dataset/fma_medium/val"]
+    "train_set": ["data/small_dataset/demo_songs", "data/small_dataset/fma_medium/train", "data/small_dataset/unique_1K_songs", "data/small_dataset/test_15"],
+    "val_set": ["data/small_dataset/fma_medium/val"],
+    "loss": {
+        "loss": "NTXent_Loss"
+    }
 }

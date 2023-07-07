@@ -116,25 +116,26 @@ def audio_augmentation_chain(
     Returns:
         Tuple[np.ndarray, np.ndarray]: Tuple corresponding to (Spectrogram_original, Spectrogram_augmented).
     """
-    if rng.random() > 0.40:
-        augmentation_chain = Compose(
-            [
-                AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=5., max_snr_in_db=10., p=1.),
-                ApplyImpulseResponse(ir_path=ir_path, p=1.),
-            ]
-        )
+
+    snr_prob = rng.random()
+    if snr_prob <= 0.50:
+        snr = rng.uniform(low=0, high=5)
+    elif 0.50 < snr_prob <= 0.80:
+        snr = rng.uniform(low=5, high=10)
     else:
-        augmentation_chain = Compose(
-            [
-                AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=0., max_snr_in_db=5., p=1.),
-                ApplyImpulseResponse(ir_path=ir_path, p=1.),
-            ]
-        )
+        snr = rng.uniform(low=10, high=15)
+
+    augmentation_chain = Compose(
+        [
+            AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=snr, max_snr_in_db=snr, p=1.),
+            ApplyImpulseResponse(ir_path=ir_path, p=1.),
+        ]
+    )
     # Get the corresponding segment
     y = signal[time_index * sr:(time_index + 1) * sr]
 
     # Offset probability
-    if rng.random() > 0.75:
+    if rng.random() > 0.70:
         offset_signal = time_offset_modulation(signal=signal, time_index=time_index)
         augmented_signal = augmentation_chain(offset_signal, sample_rate=8000)
     else:
@@ -156,10 +157,11 @@ def cutout_spec_augment_mask(rng: np.random.Generator = None):
     H_start, dH = rng.integers(low=0, high=H_max, size=2)
     W_start = rng.integers(low=0, high=W_max, size=1).item()
     dW = rng.integers(low=0, high=int(0.1 * W), size=1).item()
-    
+
     mask[:, H_start:H_start + dH, W_start:W_start + dW] = 0
 
     return mask
+
 
 def query_sequence_search(D, I):
     compensations = []
@@ -174,9 +176,11 @@ def query_sequence_search(D, I):
         scores.append(np.sum(D_flat[idxs]))
     return candidates[np.argmax(scores)], round(max(scores), 4)
 
+
 def search_index(idx: int, sorted_arr: np.ndarray):
     candidate_indices = np.where(sorted_arr <= idx)[0]
     return sorted_arr[candidate_indices].max()
+
 
 def majority_vote_search(d: Dict, I: np.ndarray, sorted_array: np.ndarray):
     preds = []
@@ -184,6 +188,7 @@ def majority_vote_search(d: Dict, I: np.ndarray, sorted_array: np.ndarray):
     preds = [d[str(search_index(idx, sorted_array))] for idx in I_flat]
     c = Counter(preds)
     return c.most_common()[0][0]
+
 
 def get_winner(d: Dict, I: np.ndarray, D: np.ndarray, sorted_array: np.ndarray):
     preds = []
@@ -194,7 +199,7 @@ def get_winner(d: Dict, I: np.ndarray, D: np.ndarray, sorted_array: np.ndarray):
     winner = c.most_common()[0][0]
     idxs = np.where(preds == winner)[0]
     # num_matches = c.most_common()[0][1]
-    
+
     D_shape = D.shape[0] * D.shape[1]
 
     return winner, (1 / D_shape) * D_flat_inverse[idxs].sum()

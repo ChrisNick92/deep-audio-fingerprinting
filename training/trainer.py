@@ -18,7 +18,7 @@ import torch
 from utils.deep_audio_utils import Collate_Fn
 from callbacks.callbacks import EarlyStopping
 from datasets.datasets import DynamicAudioDataset
-from loss.loss import Focal_NTxent_Loss
+from loss.loss import Focal_NTxent_Loss, NTxent_Loss_2
 from models.neural_fingerprinter import Neural_Fingerprinter
 
 SEED = 42
@@ -32,15 +32,15 @@ def parse_args():
 
 
 def training_loop(
-    train_dset, val_dset, epochs, batch_size, lr, patience, model_name=None, output_path=None, optim="Adam"
+    train_dset, val_dset, epochs, batch_size, lr, patience, loss_fn, model_name=None, output_path=None, optim="Adam"
 ):
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Current device: {device}")
     N = batch_size // 2
     model = Neural_Fingerprinter().to(device)
+    loss_fn = loss_fn.to(device)
     num_workers = multiprocessing.cpu_count()
-    loss_fn = Focal_NTxent_Loss(n_org=N, n_rep=N, device=device, gamma=2.).to(device)
     train_dloader = DataLoader(
         train_dset,
         batch_size=N,
@@ -139,7 +139,17 @@ if __name__ == '__main__':
     model_name = config['model name']
     optimizer = config['optimizer']
     output_path = os.path.join(project_path, config['output_path'])
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+    loss = config['loss']
+    if loss['loss'] == 'NTXent_Loss':
+        loss_fn = NTxent_Loss_2(n_org=batch_size // 2, n_rep=batch_size // 2, device=device).to(device)
+    elif loss['loss'] == 'Focal_Loss':
+        loss_fn = Focal_NTxent_Loss(n_org=batch_size // 2, n_rep=batch_size // 2, device=device,
+                                    gamma=loss['gamma']).to(device)
+    else:
+        raise ValueError(f'Loss not implemented. Choose either NTXent_Loss or Focal_Loss')
+    
     print(f'Preparing training set...')
     train_set = torch.utils.data.ConcatDataset(
         [
@@ -163,6 +173,7 @@ if __name__ == '__main__':
         batch_size=batch_size,
         lr=lr,
         patience=patience,
+        loss_fn=loss_fn,
         model_name=model_name,
         output_path=output_path,
         optim=optimizer

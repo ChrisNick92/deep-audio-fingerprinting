@@ -1,0 +1,14 @@
+{
+    "model": "data/pretrained_models/baseline_fp.pt",
+    "index": "data/faiss_indexes/baseline_fp/baseline_fp_small.index",
+    "json": "data/faiss_indexes/baseline_fp/baseline_fp_small.json",
+    "test_songs": "data/small_dataset/test_15",
+    "csv": "data/deep_test_15_files.csv",
+    "recording": "data/recordings/low_t.wav",
+    "duration": 10,
+    "device": "cpu",
+    "sr": 8000,
+    "hop_size": 4000,
+    "neighbors": 4,
+    "nprobes": 1
+}
