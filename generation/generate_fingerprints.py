@@ -76,7 +76,6 @@ if __name__ == '__main__':
     print(f'All songs: {len(all_songs)}')
 
     # Discard already fingerprinted songs
-    all_songs = set(all_songs).difference(to_discard)
     to_discard = [song.removesuffix('.npy') + '.wav' for song in crawl_directory(output_dir)]
     all_songs = set(all_songs).difference(to_discard)
     print(f'Songs to fingerprint: {len(all_songs)} | Discarded: {len(to_discard)}')
