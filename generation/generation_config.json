@@ -1,0 +1,8 @@
+{
+    "input dirs": ["data/small_test"],
+    "output dir": "data/fingerprints",
+    "SR": 8000,
+    "HOP SIZE": 4000,
+    "batch size": 30,
+    "weights": "data/pretrained_models/baseline_fp_02.pt"
+}
