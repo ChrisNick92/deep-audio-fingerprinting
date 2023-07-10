@@ -1,6 +1,7 @@
 import os
 import argparse
 import sys
+import time
 
 temp_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(temp_path))
@@ -49,33 +50,41 @@ if __name__ == '__main__':
 
     audio_files = crawl_directory(input_folder, extension='wav')
     djv = Dejavu(config)
-    
+    dur_times = {}
+
     for dur in durs:
-        
+
+        retrieval_time = []
         print(f'{10 * "*"} Dejavu Test with Query duration: {dur} {10 * "*"}\n')
         top_1_hit_rates = []
-        
+
         for snr in snrs:
             print(f'\n{10 * "*"} SNR: {snr} {10 * "*"}\n')
-            
+
             b_noise = AddBackgroundNoise(sounds_path=noise_folder, min_snr_in_db=snr, max_snr_in_db=snr, p=1)
             y_true, y_pred = [], []
             offset_true, offset_pred = [], []
 
             for audio_file in tqdm(audio_files):
-                
+
                 segs = get_wav_duration(audio_file) // dur
                 noise_wav = os.path.join(temp_path, "temp_noise.wav")
                 y, sr = librosa.load(audio_file, sr=8000)
+                temp_wav = os.path.join(temp_path, "temp.wav")
                 noise = b_noise(y, sample_rate=sr)
                 sf.write(file=noise_wav, data=noise, samplerate=sr, subtype='FLOAT')
-                temp_wav = os.path.join(temp_path, "temp.wav")
-                
+
                 for seg in range(segs):
+
                     ffmpeg_command = f'ffmpeg -i {noise_wav} -ss {seg * dur} -to {(seg + 1)*dur} ' +\
                         f'{temp_wav} -y -loglevel error'
                     os.system(ffmpeg_command)
+
+                    # Inference
+                    tic = time.perf_counter()
                     results = djv.recognize(FileRecognizer, temp_wav)
+                    retrieval_time.append(1000 * (time.perf_counter() - tic))
+
                     y_pred.append(results['results'][0]['song_name'].decode())
                     y_true.append(os.path.basename(audio_file)[:-4])
                     offset_true.append(seg * dur)
@@ -83,5 +92,9 @@ if __name__ == '__main__':
 
             top_1 = summary_metrics(np.array(y_true), np.array(y_pred), np.array(offset_true), np.array(offset_pred))
             top_1_hit_rates.append(top_1)
-            
+
+        dur_times[dur] = np.mean(retrieval_time)
         print(f'SNR: {snrs}\nTop 1 hit rate: {top_1_hit_rates}')
+        print(f'Retrieval Time: {np.mean(retrieval_time)}')
+    
+    print(dur_times)

@@ -34,7 +34,12 @@ if __name__ == '__main__':
     index_str = args['index']
     d = args['d']
 
-    index = faiss.index_factory(d, index_str, faiss.METRIC_INNER_PRODUCT)
+    if index_str == 'IVF':
+        quantizer = faiss.IndexFlatIP(128)
+        nlist, M, nbits = 256, 64, 8
+        index = faiss.IndexIVFPQ(quantizer, d, nlist, M, nbits)
+    else:
+        index = faiss.index_factory(d, index_str, faiss.METRIC_INNER_PRODUCT)
 
     fingerprints = crawl_directory(input_dir, extension='npy')
     total_fingerprints = 0
