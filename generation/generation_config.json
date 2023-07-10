@@ -4,5 +4,5 @@
     "SR": 8000,
     "HOP SIZE": 4000,
     "batch size": 30,
-    "weights": "data/pretrained_models/baseline_fp.pt"
+    "weights": "data/pretrained_models/baseline_fp_02.pt"
 }

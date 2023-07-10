@@ -26,7 +26,7 @@ SEED = 42
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--config', required=True, help='Training config in json format.')
+    parser.add_argument('-i', '--config', required=True, help='Training config in json format.')
 
     return parser.parse_args()
 
