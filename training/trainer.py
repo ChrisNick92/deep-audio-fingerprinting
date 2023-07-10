@@ -40,7 +40,7 @@ def training_loop(
     N = batch_size // 2
     model = Neural_Fingerprinter().to(device)
     loss_fn = loss_fn.to(device)
-    num_workers = multiprocessing.cpu_count()
+    num_workers = 8
     train_dloader = DataLoader(
         train_dset,
         batch_size=N,
