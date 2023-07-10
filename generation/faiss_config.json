@@ -1,7 +1,7 @@
 {
     "input_dir": "data/fingerprints",
     "output_dir": "data/faiss_indexes/baseline_fp",
-    "name": "baseline_fp_small",
+    "name": "baseline_fp_small_02",
     "index": "Flat",
     "d": 128
 }

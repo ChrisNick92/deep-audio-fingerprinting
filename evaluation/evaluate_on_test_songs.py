@@ -21,7 +21,7 @@ from utils.metrics import summary_metrics
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--config', required=True, help='The evaluation configuration file.')
+    parser.add_argument('-i', '--config', required=True, help='The evaluation configuration file.')
 
     return parser.parse_args()
 

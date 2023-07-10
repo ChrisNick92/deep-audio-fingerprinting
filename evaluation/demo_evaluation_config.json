@@ -1,8 +1,8 @@
 {
-    "model": "data/pretrained_models/baseline_fp.pt",
-    "index": "data/faiss_indexes/baseline_fp/baseline_fp_small.index",
-    "json": "data/faiss_indexes/baseline_fp/baseline_fp_small.json",
-    "background_noise": "data/background_vals",
+    "model": "data/pretrained_models/baseline_fp_02.pt",
+    "index": "data/faiss_indexes/baseline_fp/baseline_fp_small_02.index",
+    "json": "data/faiss_indexes/baseline_fp/baseline_fp_small_02.json",
+    "background_noise": "data/background_test",
     "demo_songs": "data/small_dataset/demo_songs",
     "snrs": [0, 5, 10, 15],
     "durations": [1, 2, 3, 4, 5, 10],

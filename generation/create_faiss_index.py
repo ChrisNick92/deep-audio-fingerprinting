@@ -15,7 +15,7 @@ from utils.utils import crawl_directory
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--config', required=True, help='The configuration json file.')
+    parser.add_argument('-i', '--config', required=True, help='The configuration json file.')
 
     return parser.parse_args()
 
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     index_str = args['index']
     d = args['d']
 
-    index = faiss.index_factory(d, index_str)
+    index = faiss.index_factory(d, index_str, faiss.METRIC_INNER_PRODUCT)
 
     fingerprints = crawl_directory(input_dir, extension='npy')
     total_fingerprints = 0
