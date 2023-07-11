@@ -72,7 +72,10 @@ if __name__ == '__main__':
                 y, sr = librosa.load(audio_file, sr=8000)
                 temp_wav = os.path.join(temp_path, "temp.wav")
                 noise = b_noise(y, sample_rate=sr)
-                sf.write(file=noise_wav, data=noise, samplerate=sr, subtype='FLOAT')
+                noise /= noise.max()
+                noise *= 2**15
+                noise = noise.astype(np.int16)
+                sf.write(file=noise_wav, data=noise, samplerate=sr, subtype='PCM_16')
 
                 for seg in range(segs):
 

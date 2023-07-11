@@ -169,7 +169,7 @@ def query_sequence_search(D, I):
         compensations.append([(x - i) for x in idx])
     candidates = np.unique(compensations)
     scores = []
-    D_flat = D.flatten()
+    D_flat = 1 / D.flatten()
     I_flat = I.flatten()
     for c in candidates:
         idxs = np.where((c <= I_flat) & (I_flat <= c + len(D)))[0]

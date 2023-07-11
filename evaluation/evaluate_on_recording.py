@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 import json
+import time
 
 project_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_path)
@@ -33,6 +34,7 @@ def find_songs_intervals(csv_file):
         d[os.path.basename(file)] = {'start': start, 'end': start + dur}
         start += dur
     return d
+
 
 def print_results(y_true, y_pred):
     acc = accuracy_score(y_true, y_pred)
@@ -70,12 +72,13 @@ if __name__ == '__main__':
     F = args['sr']
     H = args['hop_size']
     k = args['neighbors']
-    index.nprobes = args['nprobes']
+    index.nprobe = args['nprobes']
 
     songs_intervals = find_songs_intervals(true_songs)
     recording, sr = librosa.load(os.path.join(project_path, args['recording']), sr=F)
     y_true, y_pred = [], []
-    
+    inference_time, query_time = [], []
+
     model.eval()
     with torch.no_grad():
         for song in tqdm(true_songs, desc='Processing songs'):
@@ -87,21 +90,27 @@ if __name__ == '__main__':
             start = int(q * sr) + int(r)
 
             for seg in range(iters):
-                
+
                 # Slice recording
                 rec_slice = recording[start + seg * dur * F:start + (seg + 1) * dur * F]
-                
+
                 # Inference
+                tic = time.perf_counter()
                 J = int(np.floor((rec_slice.size - F) / H)) + 1
                 xq = [np.expand_dims(extract_mel_spectrogram(rec_slice[j * H:j * H + F]), axis=0) for j in range(J)]
                 xq = np.stack(xq)
                 out = model(torch.from_numpy(xq).to(device))
-                
+                inference_time.append(1000 * (time.perf_counter() - tic))
+
                 # Retrieval
+                tic = time.perf_counter()
                 D, I = index.search(out.cpu().numpy(), k)
                 pred, score = get_winner(json_correspondence, I, D, sorted_arr)
-                
+                query_time.append(1000 * (time.perf_counter() - tic))
+
                 y_true.append(label.removesuffix('.wav'))
                 y_pred.append(pred)
-    
+
     print_results(y_true, y_pred)
+    total_time = [x + y for x, y in zip(inference_time, query_time)]
+    print(f'Inference Time: {np.mean(inference_time)}\nQuery Time: {np.mean(query_time)}\nTotal: {np.mean(total_time)}')
