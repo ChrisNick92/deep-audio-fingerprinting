@@ -1,7 +1,13 @@
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from models.attention_mask import SpectroTemporalMask
+
 import torch.nn as nn
 import torch
 import torch.nn.functional as F
 import numpy as np
+
 
 d = 128
 h = 1024
@@ -10,10 +16,19 @@ v = int(h / d)
 channel_sequence_1 = [d, 2 * d, 2 * d]
 channel_sequence_2 = [4 * d, 4 * d, h]
 
+
 class SC(nn.Module):
 
     def __init__(
-        self, input_shape, in_channels, out_channels, kernel_sizes, padding_sizes, stride_sizes, norm="layer_norm2d"
+        self,
+        input_shape,
+        in_channels,
+        out_channels,
+        kernel_sizes,
+        padding_sizes,
+        stride_sizes,
+        norm="layer_norm2d",
+        attention=False
     ):
         super(SC, self).__init__()
 
@@ -46,9 +61,16 @@ class SC(nn.Module):
             self.BN_1x3 = nn.BatchNorm2d(out_channels)
             self.BN_3x1 = nn.BatchNorm2d(out_channels)
 
-        self.separable_conv2d = nn.Sequential(
-            self.separable_conv2d_1x3, nn.ReLU(), self.BN_1x3, self.separable_conv2d_3x1, nn.ReLU(), self.BN_3x1
-        )
+        if attention:
+            self.mask = SpectroTemporalMask(channels=C, H=H, W=W)
+            self.separable_conv2d = nn.Sequential(
+                self.mask, self.separable_conv2d_1x3, nn.ReLU(), self.BN_1x3, self.separable_conv2d_3x1, nn.ReLU(),
+                self.BN_3x1
+            )
+        else:
+            self.separable_conv2d = nn.Sequential(
+                self.separable_conv2d_1x3, nn.ReLU(), self.BN_1x3, self.separable_conv2d_3x1, nn.ReLU(), self.BN_3x1
+            )
 
     def forward(self, x):
         return self.separable_conv2d(x)
@@ -65,7 +87,8 @@ class Encoder(nn.Module):
         channel_seq=[1, d, d, 2 * d, 2 * d, 4 * d, 4 * d, h, h],
         kernel_seq=[[(1, 3), (3, 1)] for i in range(8)],
         stride_seq=[[(1, 2), (2, 1)] for i in range(8)],
-        pad_seq=[[(0, 1), (1, 0)] for i in range(8)]
+        pad_seq=[[(0, 1), (1, 0)] for i in range(8)],
+        attention=False
     ):
         super(Encoder, self).__init__()
 
@@ -78,13 +101,15 @@ class Encoder(nn.Module):
                     out_channels=channel_seq[i + 1],
                     kernel_sizes=kernel_seq[i],
                     padding_sizes=pad_seq[i],
-                    stride_sizes=stride_seq[i]
+                    stride_sizes=stride_seq[i],
+                    attention=attention
                 )
             )
 
     def forward(self, x):
         x = self.encoder(x)
         return torch.flatten(x, start_dim=1)
+
 
 class DivEncLayer(nn.Module):
 
@@ -115,11 +140,12 @@ class DivEncLayer(nn.Module):
         x = torch.reshape(x, (x.shape[0], self.q, -1))
         return self._split_encoding(x)
 
+
 class Neural_Fingerprinter(nn.Module):
 
-    def __init__(self) -> None:
+    def __init__(self, attention=False) -> None:
         super(Neural_Fingerprinter, self).__init__()
-        self.encoder = Encoder()
+        self.encoder = Encoder(attention=attention)
         self.div_enc_layer = DivEncLayer()
 
     def forward(self, x):
