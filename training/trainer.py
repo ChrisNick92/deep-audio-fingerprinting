@@ -32,13 +32,23 @@ def parse_args():
 
 
 def training_loop(
-    train_dset, val_dset, epochs, batch_size, lr, patience, loss_fn, model_name=None, output_path=None, optim="Adam"
+    train_dset,
+    val_dset,
+    epochs,
+    batch_size,
+    lr,
+    patience,
+    loss_fn,
+    model_name=None,
+    output_path=None,
+    optim="Adam",
+    attention=False
 ):
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Current device: {device}")
     N = batch_size // 2
-    model = Neural_Fingerprinter().to(device)
+    model = Neural_Fingerprinter(attention=attention).to(device)
     loss_fn = loss_fn.to(device)
     num_workers = 8
     train_dloader = DataLoader(
@@ -140,6 +150,8 @@ if __name__ == '__main__':
     optimizer = config['optimizer']
     output_path = os.path.join(project_path, config['output_path'])
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    attention = args['attention']
+    print(f'Attention: {attention}')
 
     loss = config['loss']
     if loss['loss'] == 'NTXent_Loss':
@@ -149,7 +161,7 @@ if __name__ == '__main__':
                                     gamma=loss['gamma']).to(device)
     else:
         raise ValueError(f'Loss not implemented. Choose either NTXent_Loss or Focal_Loss')
-    
+
     print(f'Preparing training set...')
     train_set = torch.utils.data.ConcatDataset(
         [
