@@ -5,13 +5,14 @@ import torch
 
 class SpectroTemporalMask(nn.Module):
 
-    def __init__(self, channels, H, W):
+    def __init__(self, channels, H, W, S=100):
         super(SpectroTemporalMask, self).__init__()
         self.channels = channels
         # Height -> Frequencies, Width -> Time stamps
         # C x F x T
         self.F = H
         self.T = W
+        self.S = S
 
         self.W_temp = nn.Parameter(torch.randn((self.channels, self.T, 1)), requires_grad=True)
         self.W_spec = nn.Parameter(torch.randn((self.channels, 1, self.F)), requires_grad=True)
@@ -27,4 +28,4 @@ class SpectroTemporalMask(nn.Module):
         
         A_mask = torch.einsum("cft,cft->cft", A_temp, A_spec)
         
-        return A_mask * x
+        return A_mask * x * self.S
