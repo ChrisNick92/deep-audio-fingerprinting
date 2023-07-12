@@ -188,5 +188,6 @@ if __name__ == '__main__':
         loss_fn=loss_fn,
         model_name=model_name,
         output_path=output_path,
-        optim=optimizer
+        optim=optimizer,
+        attention=attention
     )
