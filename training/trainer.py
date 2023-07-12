@@ -150,7 +150,7 @@ if __name__ == '__main__':
     optimizer = config['optimizer']
     output_path = os.path.join(project_path, config['output_path'])
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    attention = args['attention']
+    attention = config['attention']
     print(f'Attention: {attention}')
 
     loss = config['loss']
