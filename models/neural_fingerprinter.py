@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from models.attention_mask import SpectroTemporalMask
 
@@ -7,7 +8,6 @@ import torch.nn as nn
 import torch
 import torch.nn.functional as F
 import numpy as np
-
 
 d = 128
 h = 1024
@@ -62,10 +62,10 @@ class SC(nn.Module):
             self.BN_3x1 = nn.BatchNorm2d(out_channels)
 
         if attention:
-            self.mask = SpectroTemporalMask(channels=C, H=H, W=W)
+            self.mask = SpectroTemporalMask(channels=out_channels, H=out_H, W=out_W)
             self.separable_conv2d = nn.Sequential(
-                self.mask, self.separable_conv2d_1x3, nn.ReLU(), self.BN_1x3, self.separable_conv2d_3x1, nn.ReLU(),
-                self.BN_3x1
+                self.separable_conv2d_1x3, nn.ReLU(), self.BN_1x3, self.separable_conv2d_3x1, nn.ReLU(), self.BN_3x1,
+                self.mask
             )
         else:
             self.separable_conv2d = nn.Sequential(
