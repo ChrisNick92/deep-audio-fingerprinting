@@ -52,6 +52,6 @@ class ParallelAttentionMask(nn.Module):
         U_T = x * v_T
         U_F = x * v_F
 
-        a, b, c = self.weights
+        a, b, c = F.softmax(self.weights, dim=0)
 
         return a * U_T + b * U_F + c * x
