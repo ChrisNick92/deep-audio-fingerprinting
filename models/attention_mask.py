@@ -19,12 +19,12 @@ class SpectroTemporalMask(nn.Module):
 
     def forward(self, x):
 
-        X_temp = torch.unsqueeze(torch.einsum("...cft,ctf->cf", x, self.W_temp), dim=2)
-        A_temp = F.softmax(X_temp, dim=1)
+        X_temp = torch.einsum("...cft,ctf->...cf", x, self.W_temp)
+        A_temp = F.softmax(X_temp, dim=2)
         
-        X_spec = torch.unsqueeze(torch.einsum("...cft,ctf->ct", x, self.W_spec), dim=1)
+        X_spec = torch.einsum("...cft,ctf->...ct", x, self.W_spec)
         A_spec = F.softmax(X_spec, dim=2)
         
-        A_mask = torch.einsum("cft,cft->cft", A_temp, A_spec)
+        A_mask = torch.einsum("...cf,...ct->cft", A_temp, A_spec)
         
         return A_mask * x * self.S
