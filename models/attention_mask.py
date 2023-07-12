@@ -24,7 +24,6 @@ class SpectroTemporalMask(nn.Module):
         
         X_spec = torch.unsqueeze(torch.einsum("...cft,ctf->ct", x, self.W_spec), dim=1)
         A_spec = F.softmax(X_spec, dim=2)
-        print(A_spec.shape, A_temp.shape)
         
         A_mask = torch.einsum("cft,cft->cft", A_temp, A_spec)
         
