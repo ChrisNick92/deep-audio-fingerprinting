@@ -113,17 +113,18 @@ class Encoder(nn.Module):
 
 class DivEncLayer(nn.Module):
 
-    def __init__(self, q=d, unit_dim=[32, 1]):
+    def __init__(self, q=d, unit_dim=[32, 1], v=v):
         super(DivEncLayer, self).__init__()
         self.split_fc_layers = nn.ModuleList()
         self.q = q
         self.unit_dim = unit_dim
+        self.v = v
         self._construct_layers()
 
     def _construct_layers(self):
         for i in range(self.q):
             seq = nn.Sequential()
-            seq.append(nn.Linear(v, self.unit_dim[0]))
+            seq.append(nn.Linear(self.v, self.unit_dim[0]))
             seq.append(nn.ELU())
             seq.append(nn.LayerNorm(self.unit_dim[0]))
             seq.append(nn.Linear(self.unit_dim[0], self.unit_dim[1]))
