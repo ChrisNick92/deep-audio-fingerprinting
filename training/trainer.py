@@ -20,6 +20,7 @@ from callbacks.callbacks import EarlyStopping
 from datasets.datasets import DynamicAudioDataset
 from loss.loss import Focal_NTxent_Loss, NTxent_Loss_2
 from models.neural_fingerprinter import Neural_Fingerprinter
+from models.resnet_like import ResNet
 
 SEED = 42
 
@@ -42,13 +43,19 @@ def training_loop(
     model_name=None,
     output_path=None,
     optim="Adam",
-    attention=False
+    attention=False,
+    model='Fingerprinter'
 ):
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Current device: {device}")
     N = batch_size // 2
-    model = Neural_Fingerprinter(attention=attention).to(device)
+
+    if model == 'Fingerprinter':
+        model = Neural_Fingerprinter(attention=attention).to(device)
+    elif model == 'Resnet':
+        model = ResNet(C=1, H=256, W=32, attention=attention).to(device)
+
     loss_fn = loss_fn.to(device)
     num_workers = 8
     train_dloader = DataLoader(
@@ -153,6 +160,11 @@ if __name__ == '__main__':
     attention = config['attention']
     print(f'Attention: {attention}')
 
+    if config['model'] == 'Fingerprinter' or config['model'] == 'Resnet':
+        model = config['model']
+    else:
+        raise NotImplementedError(f'Model {config["model"]} not implemented. Either "Fingerprinter" or "Resnet"')
+
     loss = config['loss']
     if loss['loss'] == 'NTXent_Loss':
         loss_fn = NTxent_Loss_2(n_org=batch_size // 2, n_rep=batch_size // 2, device=device).to(device)
@@ -189,5 +201,6 @@ if __name__ == '__main__':
         model_name=model_name,
         output_path=output_path,
         optim=optimizer,
-        attention=attention
+        attention=attention,
+        model=model
     )
