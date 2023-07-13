@@ -63,9 +63,10 @@ if __name__ == '__main__':
         true_songs = [os.path.join(project_path, args['test_songs'], x.rstrip()) for x in f.readlines()]
 
     dur = args['duration']
+    attention=args['attention']
     device = 'cuda' if torch.cuda.is_available() and args['device'] == 'cuda' else 'cpu'
 
-    model = Neural_Fingerprinter().to(device)
+    model = Neural_Fingerprinter(attention=attention).to(device)
     model.load_state_dict(torch.load(os.path.join(project_path, args['model']), map_location=device))
     print(f'Running on {device}')
 

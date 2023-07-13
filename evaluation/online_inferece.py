@@ -49,8 +49,15 @@ if __name__ == '__main__':
         raise NotImplementedError(
             f'{args["search algorithm"]} not implemented. Choose either majority vote or sequence search'
         )
+        
+    try:
+        attention = args['attention']
+        print(f'Attention: {attention}')
+    except Exception as e:
+        attention = False
+        
     device = 'cuda' if torch.cuda.is_available() and args['device'] == 'cuda' else 'cpu'
-    model = Neural_Fingerprinter().to(device)
+    model = Neural_Fingerprinter(attention=attention).to(device)
     model.load_state_dict(torch.load(os.path.join(project_path, args['weights'])))
 
     F, H, FMB = args['SR'], args['Hop size'], args['FMB']

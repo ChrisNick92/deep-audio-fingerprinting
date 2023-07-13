@@ -32,9 +32,15 @@ if __name__ == '__main__':
     config_file = os.path.join(project_path, args.config)
     with open(config_file, 'r') as f:
         args = json.load(f)
+    
+    try:
+        attention = args['attention']
+        print(f'Attention: {attention}')
+    except Exception as e:
+        attention = False
 
     device = 'cuda' if torch.cuda.is_available() and args['device'] == 'cuda' else 'cpu'
-    model = Neural_Fingerprinter().to(device)
+    model = Neural_Fingerprinter(attention=attention).to(device)
     model.load_state_dict(torch.load(os.path.join(project_path, args['model']), map_location=device))
     print(f'Running on {device}')
 

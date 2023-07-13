@@ -60,9 +60,10 @@ if __name__ == '__main__':
     output_dir = os.path.join(project_path, args["output dir"])
     batch_size = args["batch size"]
     pt_file = args["weights"]
+    attention = args['attention']
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    model = Neural_Fingerprinter().to(device)
+    model = Neural_Fingerprinter(attention=attention).to(device)
     model.load_state_dict(torch.load(pt_file))
     print(f'Running on {device}')
     
