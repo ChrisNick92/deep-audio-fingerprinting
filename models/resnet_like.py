@@ -49,16 +49,16 @@ class ResBlock(nn.Module):
 
 class ResNet(nn.Module):
 
-    def __init__(self, C, H, W):
+    def __init__(self, C, H, W, attention=False):
         super(ResNet, self).__init__()
 
         self.first_conv = nn.Conv2d(in_channels=C, out_channels=32, kernel_size=3, stride=1, padding=1)
         self.resblocks = nn.ModuleList()
-        self.resblocks.append(ResBlock(in_channels=32, out_channels=32, attention_flag=True, H=H, W=W))
+        self.resblocks.append(ResBlock(in_channels=32, out_channels=32, attention_flag=False, H=H, W=W))
         C = 32
         for i in range(5):
             self.resblocks.append(
-                ResBlock(in_channels=C, out_channels=2 * C, H=H, W=W, reduce=True, attention_flag=True)
+                ResBlock(in_channels=C, out_channels=2 * C, H=H, W=W, reduce=True, attention_flag=attention)
             )
             C *= 2
             H /= 2
