@@ -53,6 +53,7 @@ if __name__ == '__main__':
     config_file = args.config
     with open(config_file, "r") as f:
         args = json.load(f)
+        print(f'Config:\n{args}\n')
 
     SR = args["SR"]
     HOP_SIZE = args["HOP SIZE"]

@@ -140,8 +140,7 @@ if __name__ == '__main__':
         config = json.load(f)
 
     print(f'{10*"*"} Training configuration {10*"*"}\n')
-    for k, v in config.items():
-        print(f'{k}: {v}')
+    print(f'Config:\n{config}\n')
 
     epochs = config['epochs']
     batch_size = config['batch size']
@@ -158,7 +157,6 @@ if __name__ == '__main__':
     output_path = os.path.join(project_path, config['output_path'])
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     attention = config['attention']
-    print(f'Attention: {attention}')
 
     if config['model'] == 'Fingerprinter' or config['model'] == 'Resnet':
         model = config['model']

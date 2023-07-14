@@ -32,6 +32,7 @@ if __name__ == '__main__':
     config_file = os.path.join(project_path, args.config)
     with open(config_file, 'r') as f:
         args = json.load(f)
+        print(f'Config:\n{args}\n')
     
     try:
         attention = args['attention']
