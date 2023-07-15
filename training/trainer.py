@@ -158,10 +158,10 @@ if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     attention = config['attention']
 
-    if config['model'] == 'Fingerprinter' or config['model'] == 'Resnet':
+    try:
         model = config['model']
-    else:
-        raise NotImplementedError(f'Model {config["model"]} not implemented. Either "Fingerprinter" or "Resnet"')
+    except Exception as e:
+        model = 'Fingerprinter'
 
     loss = config['loss']
     if loss['loss'] == 'NTXent_Loss':
