@@ -19,7 +19,6 @@ if __name__ == '__main__':
     args = parse_args()
     src, dst = args.source_dir, args.destination_dir
     in_extension = args.input_extension if args.input_extension else 'wav'
-    metadata = args.metadata
 
     input_files = crawl_directory(directory=src, extension=in_extension)
     totals, fails = 0, 0
@@ -28,8 +27,7 @@ if __name__ == '__main__':
     for file in tqdm(input_files, desc='Converting files.'):
         try:
             out_file = os.path.join(dst, os.path.basename(file).removesuffix(in_extension) + 'wav')
-            ffmpeg_command = f"ffmpeg -i {file} -ar 8000 -ac 1 -loglevel error {out_file}"
-            subprocess.check_call(ffmpeg_command.split())
+            subprocess.check_call(['ffmpeg', '-i', file, '-ar', '8000', '-ac', '1', '-loglevel', 'error', out_file])
         except subprocess.CalledProcessError as e:
             print(f'An error occured on {os.path.basename(file)}\nError: {e}')
             fails += 1

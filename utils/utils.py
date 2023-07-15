@@ -5,7 +5,7 @@ from collections import Counter
 from typing import Dict
 
 import numpy as np
-from audiomentations import Compose, AddBackgroundNoise, ApplyImpulseResponse
+from audiomentations import Compose, AddBackgroundNoise, ApplyImpulseResponse, HighPassFilter, LowPassFilter
 import librosa
 
 
@@ -127,10 +127,21 @@ def audio_augmentation_chain(
 
     augmentation_chain = Compose(
         [
-            AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=snr, max_snr_in_db=snr, p=1.),
+            AddBackgroundNoise(sounds_path=noise_path, min_snr_in_db=snr, max_snr_in_db=snr, p=0.8),
             ApplyImpulseResponse(ir_path=ir_path, p=1.),
         ]
     )
+    
+    cut_freq_prob = rng.random()
+    if cut_freq_prob >= 0.60:
+        freq_cuts = Compose(
+            [
+                LowPassFilter(min_cutoff_freq=2000, max_cutoff_freq=3000, min_rolloff=12, max_rolloff=36, p=1),
+                HighPassFilter(max_cutoff_freq=1000, min_cutoff_freq=500, min_rolloff=12, max_rolloff=36, p=1)
+            ]
+        )
+        augmentation_chain.transforms.append(freq_cuts)
+        
     # Get the corresponding segment
     y = signal[time_index * sr:(time_index + 1) * sr]
 
@@ -146,6 +157,7 @@ def audio_augmentation_chain(
     S2 = extract_mel_spectrogram(augmented_signal)
 
     return S1, S2
+
 
 def cutout_spec_augment_mask(rng: np.random.Generator = None):
 
@@ -169,7 +181,7 @@ def query_sequence_search(D, I):
         compensations.append([(x - i) for x in idx])
     candidates = np.unique(compensations)
     scores = []
-    D_flat = 1 / D.flatten()
+    D_flat = D.flatten()
     I_flat = I.flatten()
     for c in candidates:
         idxs = np.where((c <= I_flat) & (I_flat <= c + len(D)))[0]
