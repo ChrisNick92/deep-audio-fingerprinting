@@ -49,13 +49,13 @@ if __name__ == '__main__':
         raise NotImplementedError(
             f'{args["search algorithm"]} not implemented. Choose either majority vote or sequence search'
         )
-        
+
     try:
         attention = args['attention']
         print(f'Attention: {attention}')
     except Exception as e:
         attention = False
-        
+
     device = 'cuda' if torch.cuda.is_available() and args['device'] == 'cuda' else 'cpu'
     model = Neural_Fingerprinter(attention=attention).to(device)
     model.load_state_dict(torch.load(os.path.join(project_path, args['weights'])))
@@ -79,10 +79,9 @@ if __name__ == '__main__':
                 # Inference
                 tic = time.perf_counter()
                 J = int(np.floor((aggregated_buf.size - F) / H)) + 1
-                xq = [
-                    np.expand_dims(extract_mel_spectrogram(aggregated_buf[j * H:j * H + F]), axis=0) for j in range(J)
-                ]
-                xq = np.stack(xq)
+                xq = np.stack(
+                    [extract_mel_spectrogram(aggregated_buf[j * H:j * H + F]).reshape(1, 256, 32) for j in range(J)]
+                )
                 out = model(torch.from_numpy(xq).to(device))
                 inference_time = 1000 * (time.perf_counter() - tic)
 
@@ -91,20 +90,20 @@ if __name__ == '__main__':
                 D, I = index.search(out.cpu().numpy(), k)
 
                 if s_flag == 'sequence search':
-                    
+
                     idx, score = query_sequence_search(D, I)
                     true_idx = search_index(idx=idx, sorted_arr=sorted_arr)
                     winner = json_correspondence[str(true_idx)]
-                    
+
                     # Determine offset
                     offset = (idx - true_idx) * H / F
                     m_start, s_start = divmod(offset, 60)
                     m_end, s_end = divmod(offset + dur, 60)
-                    
+
                     now = datetime.datetime.now().time()
                     out_str = f'Time: {now} | Pred: {winner} | Score: {score:.3f} | Offset: {offset} | ' +\
                         f'Query time span: {int(m_start)}:{int(s_start):02d}-{int(m_end)}:{int(s_end):02d}'
-                        
+
                 elif s_flag == 'majority vote':
                     winner, score = get_winner(d=json_correspondence, I=I, D=D, sorted_array=sorted_arr)
                     now = datetime.datetime.now().time()
