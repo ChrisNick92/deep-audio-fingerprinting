@@ -25,7 +25,15 @@ pip install -r requirements.txt
 
 ## 1. Training the deep neural network
 
-To start training the deep neural network you'll need to have a collections of songs splitted into `train/val` sets. A well-known and publicly available dataset utilized for such MIR tasks is the <a href="https://github.com/mdeff/fma"> FMA </a> dataset. Then, you'll need to have a collection of background noises and splitted into `background_train, background_test` sets. These noises must capture all the noise that the model will face in a realistic scenario. Examples can be found on youtube from background noises from cars, vehicles, people talking, etc. To simulate the reverbaration effects, you'll need to download a collection of impulse responses again splitted into `impulse_train, impulse_val` sets. Then, place all these folders inside `deep-audio-fingerprinting/data` and create a configuration file (`training_config.json`) for training like the one below
+To start training the deep neural network you'll need to have a collections of songs splitted into `train/val` sets. All files should be in wav format with 8KHz sampling rate with one channel. If you have a collection of songs that you want to convert you can type
+
+```bash
+python utils/convert_songs.py -src <path_to_source_dir> -dst <path_to_destination_dir>
+```
+
+to convert a collection of mp3 files into .wav files in 8KHz with 1 channel. To handle other extensions you there is an option `-ex` indicating the extension of the input files. For example, if you enter `-ex wav` then the input files are expecting to be in a wav format. To convert the files you'll need to have `ffmpeg` installed on your machine.
+
+A well-known and publicly available dataset utilized for such MIR tasks is the <a href="https://github.com/mdeff/fma"> FMA </a> dataset. Then, you'll need to have a collection of background noises and splitted into `background_train, background_test` sets. These noises must capture all the noise that the model will face in a realistic scenario. Examples can be found on youtube from background noises from cars, vehicles, people talking, etc. To simulate the reverbaration effects, you'll need to download a collection of impulse responses again splitted into `impulse_train, impulse_val` sets. Then, place all these folders inside `deep-audio-fingerprinting/data` and create a configuration file (`training_config.json`) for training like the one below
 
 ```
 {
@@ -125,4 +133,107 @@ The parameter "duration" corresponds to the length of the query duration in seco
 ```bash
 python evaluation/online_inference.py --config evaluation/online_config.json
 ```
+
+## 4. Performance
+
+Below you can a see the results of this approach on a database comprising about 26K songs. 25K come from the FMA dataset corresponding to 30 sec audio clips, while the rest are downloaded from you tube and are full length songs. The database consists about ~2M fingerprints. Below you see the results on a recorded audio corresponding to 15 songs played sequentially one after the other. You can see a model without applying low/high pass filters and a model that is trained on such degradations. The comparison is the with the dejavu open source library. 
+
+<table>
+  <caption style="font-size: 20px;">Performance (Accuracy) of the Music Recognition Systems on Microphone Experiment.</caption>
+  <thead>
+    <tr>
+      <th>Metrics</th>
+      <th>Query length (s)</th>
+      <th>low</th>
+      <th>mid</th>
+      <th>high</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Deep Audio</td>
+      <td></td>
+      <td><strong>85.03%</strong></td>
+      <td><strong>62.65%</strong></td>
+      <td><strong>41.92%</strong></td>
+    </tr>
+    <tr>
+      <td>Deep Audio (No Filters)</td>
+      <td>2</td>
+      <td>67.22%</td>
+      <td>49.02%</td>
+      <td>19.47%</td>
+    </tr>
+    <tr>
+      <td>Dejavu</td>
+      <td></td>
+      <td>12.63%</td>
+      <td>6.50%</td>
+      <td>10.73%</td>
+    </tr>
+    <tr>
+      <td>Deep Audio</td>
+      <td></td>
+      <td><strong>92.66%</strong></td>
+      <td><strong>80.06%</strong></td>
+      <td><strong>62.52%</strong></td>
+    </tr>
+    <tr>
+      <td>Deep Audio (No Filters)</td>
+      <td>5</td>
+      <td>80.38%</td>
+      <td>65.39%</td>
+      <td>31.10%</td>
+    </tr>
+    <tr>
+      <td>Dejavu</td>
+      <td></td>
+      <td>59.21%</td>
+      <td>40.94%</td>
+      <td>47.24%</td>
+    </tr>
+    <tr>
+      <td>Deep Audio</td>
+      <td></td>
+      <td><strong>94.52%</strong></td>
+      <td><strong>90.32%</strong></td>
+      <td><strong>74.19%</strong></td>
+    </tr>
+    <tr>
+      <td>Deep Audio (No Filters)</td>
+      <td>10</td>
+      <td>84.19%</td>
+      <td>78.39%</td>
+      <td>41.29%</td>
+    </tr>
+    <tr>
+      <td>Dejavu</td>
+      <td></td>
+      <td>83.60%</td>
+      <td>70.98%</td>
+      <td>71.29%</td>
+    </tr>
+    <tr>
+      <td>Deep Audio</td>
+      <td></td>
+      <td><strong>97.56%</strong></td>
+      <td><strong>90.24%</strong></td>
+      <td>80.98%</td>
+    </tr>
+    <tr>
+      <td>Deep Audio (No Filters)</td>
+      <td>15</td>
+      <td>86.34%</td>
+      <td>80.98%</td>
+      <td>48.29%</td>
+    </tr>
+    <tr>
+      <td>Dejavu</td>
+      <td></td>
+      <td>93.33%</td>
+      <td>77.14%</td>
+      <td><strong>83.33%</strong></td>
+    </tr>
+  </tbody>
+</table>
 
