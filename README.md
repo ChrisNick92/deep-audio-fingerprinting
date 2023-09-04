@@ -241,10 +241,9 @@ Below you can a see the results of this approach on a database comprising about 
 
 Below you can see a live demonstration of the music recognition system in a query length corresponding to 5 sec. We use "sequence search" to predict the time offset of the query also. The database consists of ~26K songs and ~2M fingerprints in this case.
 
-  <head>
-  </head>
-  <body>
-    <video width="320" height="240" controls>
-      <source src="data/query_5_sec.mp4" type=video/mp4>
-    </video>
-  </body>
+
+
+
+https://github.com/ChrisNick92/deep-audio-fingerprinting/assets/91954890/435db9cf-b96e-4e74-b331-e759d387390a
+
+
