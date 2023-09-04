@@ -23,7 +23,17 @@ and then install the requirements by
 pip install -r requirements.txt
 ```
 
-## 1. Training the deep neural network
+## Table of Contents
+
+1. [Training the deep neural network](#par1)
+2. [Creating the Database](#par2)
+3. [Evaluate on Microphone](#par3)
+4. [Performance](#par4)
+5. [Live Demonstration](#par5)
+
+
+<a name="par1"></a>
+## 1. Training the deep neural network 
 
 To start training the deep neural network you'll need to have a collections of songs splitted into `train/val` sets. All files should be in wav format with 8KHz sampling rate with one channel. If you have a collection of songs that you want to convert you can type
 
@@ -65,6 +75,7 @@ This will output `fingerprinter.pt` in `data/pretrained_models/`, containing the
 
 *Note* that the quality of the model is highly dependent on the quality of the background noises & impulse responses.
 
+<a name="par2"></a>
 ## 2. Creating the database
 
 The next step is to extract the fingerprints using the pretrained model. The features are extracted for each 1 sec audio duration with a hop length corresponding to 0.5 sec for each song to placed on the database. To extract the fingerprints create an empty folder in `deep-audio-fingerprinting/data` to place the fingerprints (e.g. `fingerprints`). Create a configuration file (`generation_config.json`) like on the one below
@@ -107,6 +118,7 @@ python generation/create_faiss_index.py --config generation/faiss_config.json
 
 This will output two files `ivf20_pq64.index, ivf20_pq64.json`, in `data/faiss_indexes/`.
 
+<a name="par3"></a>
 ## 3. Evaluate on Microphone
 
 To test the overall performance of the system with your microphone, create a configuration file (`online_config.json`) of the form
@@ -134,6 +146,7 @@ The parameter "duration" corresponds to the length of the query duration in seco
 python evaluation/online_inference.py --config evaluation/online_config.json
 ```
 
+<a name="par4"></a>
 ## 4. Performance
 
 Below you can a see the results of this approach on a database comprising about 26K songs. 25K come from the FMA dataset corresponding to 30 sec audio clips, while the rest are downloaded from you tube and are full length songs. The database consists about ~2M fingerprints. Below you see the results on a recorded audio corresponding to 15 songs played sequentially one after the other. You can see a model without applying low/high pass filters and a model that is trained on such degradations. The comparison is the with the dejavu open source library. 
@@ -237,6 +250,7 @@ Below you can a see the results of this approach on a database comprising about 
   </tbody>
 </table>
 
+<a name="par5"></a>
 ## 5. Live Demonstration
 
 Below you can see a live demonstration of the music recognition system in a query length corresponding to 5 sec. We use "sequence search" to predict the time offset of the query also. The database consists of ~26K songs and ~2M fingerprints in this case.
