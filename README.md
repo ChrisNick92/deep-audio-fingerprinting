@@ -1,6 +1,14 @@
 # deep-audio-fingerprinting
 A repository for my MSc thesis in Data Science &amp; Machine Learning @ NTUA. A deep learning approach to audio fingerprinting for recognizing songs on real time through the microphone.
 
+## Live Demonstration
+
+Below you can see a live demonstration of the music recognition system in a query length corresponding to 5 sec. We use "sequence search" to predict the time offset of the query also. The database consists of ~26K songs and ~2M fingerprints in this case.
+
+https://github.com/ChrisNick92/deep-audio-fingerprinting/assets/91954890/435db9cf-b96e-4e74-b331-e759d387390a
+
+In the upcoming paragraphs I briefly explain how the code of this repository works by providing some directions to train and validate your own model. The code its not updated frequently so you may experience some unxpected errors. In the future, I am planning to refactor the repository and create a more detailed doc with reproducibility instructions. Until then, I am always accessible to provide any help in the issues sections. Thanks for using, enjoy! 😃😄 
+
 This repository is a PyTorch implementation of the paper <a href="https://arxiv.org/pdf/2010.11910.pdf"> Neural Audio Fingerprint for High-specific Audio Retrieval based on Contrastive Learning </a>. In short, the goal is to train a deep neural network to extract relevant information from short audio fragments. This approach, offers an alternative way of handling the song identification problem as opposed to all Shazam-like algorithms, where they heavily relied on sophisticated feature extraction techniques.
 
 In this repo we apply a series of data augmentations and train the neural network with contrastive loss to make it as robust as possible against to signal distortions that may arise in a realistic scenario. Below we describe:
@@ -29,7 +37,6 @@ pip install -r requirements.txt
 2. [Creating the Database](#par2)
 3. [Evaluate on Microphone](#par3)
 4. [Performance](#par4)
-5. [Live Demonstration](#par5)
 
 
 <a name="par1"></a>
@@ -249,15 +256,5 @@ Below you can a see the results of this approach on a database comprising about 
     </tr>
   </tbody>
 </table>
-
-<a name="par5"></a>
-## 5. Live Demonstration
-
-Below you can see a live demonstration of the music recognition system in a query length corresponding to 5 sec. We use "sequence search" to predict the time offset of the query also. The database consists of ~26K songs and ~2M fingerprints in this case.
-
-
-
-
-https://github.com/ChrisNick92/deep-audio-fingerprinting/assets/91954890/435db9cf-b96e-4e74-b331-e759d387390a
 
 
