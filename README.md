@@ -55,7 +55,7 @@ to convert a collection of mp3 files into .wav files in 8KHz with 1 channel. To 
 
 A well-known and publicly available dataset utilized for such MIR tasks is the <a href="https://github.com/mdeff/fma"> FMA </a> dataset. Then, you'll need to have a collection of background noises and splitted into `background_train, background_test` sets. These noises must capture all the noise that the model will face in a realistic scenario. Examples can be found on youtube from background noises from cars, vehicles, people talking, etc. To simulate the reverbaration effects, you'll need to download a collection of impulse responses again splitted into `impulse_train, impulse_val` sets. Then, place all these folders inside `deep-audio-fingerprinting/data` and create a configuration file (`training_config.json`) for training like the one below
 
-```
+```python
 {
     "epochs": 120,
     "patience": 15,
@@ -90,7 +90,7 @@ This will output `fingerprinter.pt` in `data/pretrained_models/`, containing the
 
 The next step is to extract the fingerprints using the pretrained model. The features are extracted for each 1 sec audio duration with a hop length corresponding to 0.5 sec for each song to placed on the database. To extract the fingerprints create an empty folder in `deep-audio-fingerprinting/data` to place the fingerprints (e.g. `fingerprints`). Create a configuration file (`generation_config.json`) like on the one below
 
-```
+```python
 {
     "SR": 8000,
     "HOP SIZE": 4000,
@@ -110,7 +110,7 @@ python generation/generate_fingerprints.py --config generation/generation_config
 
 This will output the fingerprints from the songs in the folders `train,val` in `data/fingerprints`. The fingerprints are in the form of numpy arrays, corresponding to 128-dimensional vectors. To reduce the size of the fingerprints and to achieve quick retrievals we use product quantization with a non exhaustive search based on inverted lists. We use the <a href="https://github.com/facebookresearch/faiss"> faiss </a> library to implement these techniques. The database in this case, is represented by a faiss index (`.index file`), and by a `.json` file. The index contains the quntized representations and the index contains the song names corresponding to each index on the database. To generate the index + json files, first create a configuration file like the one below
 
-```
+```python
 {
     "input_dir": "data/fingerprints",
     "output_dir": "data/faiss_indexes/",
@@ -133,7 +133,7 @@ This will output two files `ivf20_pq64.index, ivf20_pq64.json`, in `data/faiss_i
 
 To test the overall performance of the system with your microphone, create a configuration file (`online_config.json`) of the form
 
-```
+```python
 {
     "SR": 8000,
     "Hop size": 4000,
