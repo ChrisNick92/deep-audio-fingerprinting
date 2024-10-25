@@ -7,7 +7,10 @@ Below you can see a live demonstration of the music recognition system in a quer
 
 https://github.com/ChrisNick92/deep-audio-fingerprinting/assets/91954890/435db9cf-b96e-4e74-b331-e759d387390a
 
+## A Note
 In the upcoming paragraphs I briefly explain how the code of this repository works by providing some directions to train and validate your own model. The code its not updated frequently so you may experience some unxpected errors. In the future, I am planning to refactor the repository and create a more detailed doc with reproducibility instructions. Until then, I am always accessible to provide any help in the issues sections. Thanks for using, enjoy! 😃😄 
+
+## Overview
 
 This repository is a PyTorch implementation of the paper <a href="https://arxiv.org/pdf/2010.11910.pdf"> Neural Audio Fingerprint for High-specific Audio Retrieval based on Contrastive Learning </a>. In short, the goal is to train a deep neural network to extract relevant information from short audio fragments. This approach, offers an alternative way of handling the song identification problem as opposed to all Shazam-like algorithms, where they heavily relied on sophisticated feature extraction techniques.
 
