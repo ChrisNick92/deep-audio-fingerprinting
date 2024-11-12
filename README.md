@@ -1,6 +1,10 @@
 # deep-audio-fingerprinting
 A repository for my MSc thesis in Data Science &amp; Machine Learning @ NTUA. A deep learning approach to audio fingerprinting for recognizing songs on real time through the microphone.
 
+### Thesis pdf
+
+The pdf file of the thesis can be found via the following link: <a href="https://dspace.lib.ntua.gr/xmlui/bitstream/handle/123456789/59099/Nikou_DSML_Thesis.pdf?sequence=1&isAllowed=y"> Audio Signal Processing and Audio Fingerprinting: Implementing a Music Recognition System</a>
+
 ## Live Demonstration
 
 Below you can see a live demonstration of the music recognition system in a query length corresponding to 5 sec. We use "sequence search" to predict the time offset of the query also. The database consists of ~26K songs and ~2M fingerprints in this case.
